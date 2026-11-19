@@ -5,7 +5,23 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template('index.html')
+    return render_template('auth.html')
+
+@app.route("/menu", methods=['POST'])
+def menu():
+
+    login = request.form('login')
+
+    sel = "secret"
+
+    etatAuth = authentification(sel)
+
+    if etatAuth == True :
+        return render_template('index.html')
+    else :
+        return render_template('auth.html', login = login)
+
+
 
 @app.route("/submit", methods=['POST'])
 def contenuSite():
@@ -29,7 +45,11 @@ def contenuSite():
 
         return render_template('albumsByYSearch.html')
 
-    return "<p>{}</p>".format(choice)
+    #elif choice == '5' :
+
+
+
+    return "Bonjour"
 
 @app.route("/albums", methods=['POST'])
 def contenuAlbums():
@@ -148,66 +168,69 @@ def albums_by_year():
     connexion.close()
 
     return resultat
-# # authentification :
+# authentification :
 
-# # pour demain, implémenter md5, sql enregistre que md5 avec scell et la requete compare md5 + scell (expl : secret) que j'ajoute dans la requete de recherche dans 
-# # la bdd à la suite du mdp (expl : 123secret)
+# pour demain, implémenter md5, sql enregistre que md5 avec scell et la requete compare md5 + scell (expl : secret) que j'ajoute dans la requete de recherche dans 
+# la bdd à la suite du mdp (expl : 123secret)
 
 
 
-# sel = "secret"
 
-# def authentification(login, password, sel):
 
-#     #connexion à la bdd
-#     connexion = mysql.connector.connect(
-#         host='localhost',
-#         user='root',
-#         password='root',
-#         database='record_company'
-#     )
+def authentification(sel):
 
-#     # curseur qui va récup les infos dans bdd avec les requetes
-#     curseur = connexion.cursor()
+#connexion à la bdd
+    connexion = mysql.connector.connect(
+    host='localhost',
+    user='root',
+    password='root',
+    database='record_company'
+    )
 
-#     curseur.execute(f"SELECT login password FROM users WHERE login='{login}' and password=md5('{password + sel}');")
+    # curseur qui va récup les infos dans bdd avec les requetes
+    curseur = connexion.cursor()
 
-#     resultat = curseur.fetchall()
+    login = request.form('login')
+    password = request.form('password')
 
-#     if len(resultat)> 0:
-#         return True
-#     else:
-#         return False
+    curseur.execute(f"SELECT login password FROM users WHERE login='{login}' and password=md5('{password + sel}');")
 
-#     # bonne pratique, toujours fermer les curseurs et connexion pour libérer le serveur
-#     curseur.close()
-#     connexion.close()
+    resultat = curseur.fetchall()
 
-# # modification de mot de passe une fois connecté
+    # bonne pratique, toujours fermer les curseurs et connexion pour libérer le serveur
+    curseur.close()
+    connexion.close()
 
-# def modif_mdp(login, password, sel) :
-#     #connexion à la bdd
-#     connexion = mysql.connector.connect(
-#         host='localhost',
-#         user='root',
-#         password='root',
-#         database='record_company'
-#     )
-#     password = input("Saisissez votre nouveau mot de passe : ")
+    if len(resultat)> 0:
+        return True
+    else:
+        return False
+
+ # modification de mot de passe une fois connecté
+
+def modif_mdp(login, password, sel) :
+    #connexion à la bdd
+    connexion = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='root',
+        database='record_company'
+    )
+    password = input("Saisissez votre nouveau mot de passe : ")
     
-#     # curseur qui va récup les infos dans bdd avec les requetes
-#     curseur = connexion.cursor()    
-#     curseur.execute(f"UPDATE users SET password = md5('{password + sel}') WHERE login = '{login}'; COMMIT;")
+    # curseur qui va récup les infos dans bdd avec les requetes
+    curseur = connexion.cursor()    
+    curseur.execute(f"UPDATE users SET password = md5('{password + sel}') WHERE login = '{login}'; COMMIT;")
 
 
-#     print(f"Lignes modifiées : {curseur.rowcount}")
+    print(f"Lignes modifiées : {curseur.rowcount}")
     
     
-#     # bonne pratique, toujours fermer les curseurs et connexion pour libérer le serveur
-#     curseur.close()
-#     connexion.close()
+    # bonne pratique, toujours fermer les curseurs et connexion pour libérer le serveur
+    curseur.close()
+    connexion.close()
 
-#     return True
+    return True
 
 # is_auth = False
 
