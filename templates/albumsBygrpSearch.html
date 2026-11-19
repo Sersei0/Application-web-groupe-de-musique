@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Recherche de groupe pour trouver les albums</title>
+    </head>    
+    <body>
+        <h1>Saisissez le groupe voulu :</h1>
+        <form method="post" action="{{ url_for('contenuAlbums') }}">
+            <input type="text" name="nameGrp" id="nameGrp"/>
+            <input type="submit" />
+        </form>
+
+        <a href="/">Retour au menu</a>
+    </body>
+</html>
+

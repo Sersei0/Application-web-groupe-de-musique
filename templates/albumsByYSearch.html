@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Recherche d'une année pour voir les albums sortis</title>
+    </head>    
+    <body>
+        <h1>Saisissez l'année recherchée :</h1>
+        
+        <form method="post" action="{{ url_for('contenuAlbumsByYear') }}">
+            <input type="text" name="year" id="year"/>
+            <input type="submit" />
+        </form>
+
+        <a href="/">Retour au menu</a>
+    </body>
+</html>
+

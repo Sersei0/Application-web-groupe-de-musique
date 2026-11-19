@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Les albums de l'année {{nom_grp}}</title>
+    </head>    
+    <body>
+        <h1>Listes des albums :</h1>
+
+        <ul>
+            {%for alb in albumsByYear%}
+            <li>{{alb[0]}}</li>
+            {%endfor%}
+        </ul>
+
+        <a href="/">Retour au menu</a>
+    </body>
+</html>

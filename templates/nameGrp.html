@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Nom des différents groupes</title>
+    </head>    
+    <body>
+        <h1>Listes des groupes :</h1>
+
+        <ul>
+            {%for grp in groupes%}
+            <li>{{grp[0]}}</li>
+            {%endfor%}
+        </ul>
+
+        <a href="/">Retour au menu</a>
+    </body>
+</html>

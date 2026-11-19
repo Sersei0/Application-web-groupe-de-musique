@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Les albums, leur année de sortie et le groupe </title>
+    </head>    
+    <body>
+        <h1>Listes des albums avec leur année de sortie et le groupe :</h1>
+
+        <ul>
+            {%for alb in albums%}
+            <li>{{alb[0]}} sorti en {{alb[1]}} par {{alb[2]}}.</li>
+            {%endfor%}
+        </ul>
+
+        <a href="/">Retour au menu</a>
+    </body>
+</html>

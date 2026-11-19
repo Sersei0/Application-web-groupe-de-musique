@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+    <body>
+        <h1>Bonjour et bienvenue dans cette application conçue pour modifier notre base de données.</h1>
+        <ol>
+            <li>Afficher les noms de groupes présents dans la BDD</li>
+            <li>Afficher la liste des albums avec leur année de publication et le groupe qui les a enregistrés</li>
+            <li>Afficher les albums d'un groupe (avec une recherche par nom du groupe)</li>
+            <li>Afficher les albums sortis pour une année (avec une recherche par année)</li>
+            <li>Modifier mon mot de passe</li>
+            <li>Me reconnecter</li>
+            <li>Quitter</li>
+        </ol>
+        <form method="post" action="{{ url_for('contenuSite') }}">
+            <input type="text" name="choice" id="choice"/>
+            <input type="submit" />
+        </form>
+    </body>
+</html>
